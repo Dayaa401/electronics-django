@@ -19,7 +19,7 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>  
 {% endif %}
-        <form method="POST" action="login">
+        <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             
             <div class="mb-2">

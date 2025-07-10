@@ -1,0 +1,38 @@
+{% extends 'theme.html' %}
+{% load cart_extras %}
+{% block main %}
+<div class="container mt-4">
+    <h3>Your Cart</h3>
+    {% if products %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+    {% with cart|get_item:product.id as quantity %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ quantity }}</td>
+        <td>₹{{ product.price }}</td>
+        <td>₹{{ product.price|multiply:quantity }}</td>
+    </tr>
+    {% endwith %}
+{% endfor %}
+        </tbody>
+    </table>
+    <form method="POST" action="/checkout/">
+        {% csrf_token %}
+        <input type="text" name="address" class="form-control mb-2" placeholder="Address" required>
+        <input type="text" name="phone" class="form-control mb-2" placeholder="Phone" required>
+        <button type="submit" class="btn btn-success">Place Order</button>
+    </form>
+    {% else %}
+    <p>Your cart is empty</p>
+    {% endif %}
+</div>
+{% endblock %}

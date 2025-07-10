@@ -10,6 +10,7 @@
 </head>
 <body>
    {% extends 'theme.html' %}
+   {% load cart_extras %}
 
 {% block main %}
 <div class="container ">
@@ -29,7 +30,7 @@
         {% endfor %}
        </div>
     
-      
+        
     </div>
               <!-- Product Grid -->
           
@@ -46,11 +47,26 @@
                         <p class="card-text fw-bold">₹{{ i.price }}</p>
                     </div>
                      <div class="card-footer d-flex justify-content-between">
-            <form action="/add-to-cart/" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{ i.id }}">
-                <button type="submit" class="btn btn-outline-primary">Add to Cart</button>
-            </form>
+            <div class="d-flex align-items-center">
+    <form method="POST" action="/add-to-cart/" class="me-1">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ i.id }}">
+        <input type="hidden" name="action" value="decrease">
+        <button class="btn btn-outline-danger btn-sm">-</button>
+    </form>
+
+    <span class="mx-2 fw-bold">
+        {{ request.session.cart|get_item:i.id|default:0 }}
+    </span>
+
+    <form method="POST" action="/add-to-cart/" class="ms-1">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ i.id }}">
+        <input type="hidden" name="action" value="increase">
+        <button class="btn btn-outline-success btn-sm">+</button>
+    </form>
+</div>
+
             <button class="btn btn-outline-success">Book Now</button>
         </div>
                 </div>

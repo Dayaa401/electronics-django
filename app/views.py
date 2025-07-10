@@ -49,18 +49,28 @@ def signup(request):
         success_msg = None
 
         # Validate email field
-        if not email:
-            error_msg = "Please fill in the email."
-        elif Customer.objects.filter(email=email).exists():
+        if (not firstname):
+            error_msg = "First name is required."
+        elif (not lastname):
+            error_msg = "Lastname is required."
+        elif (not email):
+            error_msg = "Email is required."
+        elif (not mobile):
+            error_msg = "Mobile number is required."
+        elif (not password):
+            error_msg = "Password is required."
+        elif (customerdata.isexit()):
             error_msg = "Email already exists."
+
 
         # If no error, save customer
         if not error_msg:
+            customerdata.password = make_password(customerdata.password)
             success_msg = "Account created successfully."
-            customerdata.password = make_password(password)
+            
             msg ={'success': success_msg}
             customerdata.save()
-            return render(request, 'signup.html', msg)
+            return render(request,'signup.html', msg)
         else:
 
             msg = {'error': error_msg, 'value':Uservalues}
@@ -78,6 +88,7 @@ def login(request):
             #password check
             check=check_password(password,users.password)
             if check:
+                request.session['customer']=users.id
                 return redirect('/')
             else:
                 error_msg='incorrect password'
@@ -89,3 +100,58 @@ def login(request):
             return render(request,'login.html',msg)
 
 # Create your views here.
+# add to cart view
+
+def add_to_cart(request):
+    product_id = str(request.POST.get('product_id'))
+    action = request.POST.get('action')
+
+    cart = request.session.get('cart', {})
+
+    if action == 'increase':
+        cart[product_id] = cart.get(product_id, 0) + 1
+    elif action == 'decrease':
+        if cart.get(product_id):
+            cart[product_id] -= 1
+            if cart[product_id] <= 0:
+                cart.pop(product_id)
+    else:
+        cart[product_id] = 1
+
+    request.session['cart'] = cart
+    return redirect('/')
+
+
+def cart(request):
+    cart = request.session.get('cart')
+    if not cart:
+        cart = {}
+    product_ids = list(cart.keys())
+    products = Product.objects.filter(id__in=product_ids)
+
+    return render(request, 'cart.html', {'products': products, 'cart': cart})
+
+
+from .orders import Order
+
+def checkout(request):
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        customer_id = request.session.get('customer')
+        cart = request.session.get('cart')
+        products = Product.objects.filter(id__in=list(cart.keys()))
+
+        for product in products:
+            order = Order(
+                customer=Customer(id=customer_id),
+                product=product,
+                price=product.price,
+                address=address,
+                phone=phone,
+                quantity=cart[str(product.id)]
+            )
+            order.placeOrder()
+        
+        request.session['cart'] = {} 
+        return redirect('/')

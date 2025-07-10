@@ -24,9 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home),
     path('signup/',views.signup,name='signup'),
-    path('login/',views.login,name='login')
+    path('login/',views.login,name='login'),
     # path('theme/',views.theme,name='theme')
-
+    path('add-to-cart/', views.add_to_cart),
+    path('cart/', views.cart),
+    path('checkout/', views.checkout),
 
 ]
 if settings.DEBUG:

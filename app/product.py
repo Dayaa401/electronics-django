@@ -15,3 +15,7 @@ class Product(models.Model):
             return Product.objects.filter(catogery=get_id)
         else:
             return Product.objects.all()
+    
+
+    def __str__(self):
+        return self.name
