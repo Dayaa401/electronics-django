@@ -3,6 +3,7 @@ from .product import Product
 from .catogery import Catogery
 from django.contrib.auth.hashers import make_password,check_password
 from .customer import Customer
+from django.shortcuts import get_object_or_404
 # Create your views here.
 def home(request):
    
@@ -105,21 +106,23 @@ def login(request):
 def add_to_cart(request):
     product_id = str(request.POST.get('product_id'))
     action = request.POST.get('action')
+    quantity = int(request.POST.get('quantity', 1))
 
     cart = request.session.get('cart', {})
 
     if action == 'increase':
-        cart[product_id] = cart.get(product_id, 0) + 1
+        cart[product_id] = cart.get(product_id, 0) + quantity
     elif action == 'decrease':
-        if cart.get(product_id):
-            cart[product_id] -= 1
+        if product_id in cart:
+            cart[product_id] -= quantity
             if cart[product_id] <= 0:
-                cart.pop(product_id)
+                del cart[product_id]
     else:
-        cart[product_id] = 1
+        cart[product_id] = quantity
 
     request.session['cart'] = cart
     return redirect('/')
+
 
 
 def cart(request):
@@ -155,3 +158,11 @@ def checkout(request):
         
         request.session['cart'] = {} 
         return redirect('/')
+
+
+
+
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'product_detail.html', {'product': product})

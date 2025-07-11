@@ -5,10 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <title>Document</title>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  integrity="sha512-pOtdbCRkz+lHd2Xyk2rR6n62dNNVKjBtntA5Ey++BMBghhx3bt/9mC03b3sDcSHXkpi1rKMHgB2E6XVVX2xDMA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+
+
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-</head>
+
+
+
+
+
+
+  </head>
 <body>
     
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -44,7 +61,7 @@
           <a class="nav-link" href="signup">Signup</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout/">Logout</a>
+          <a class="nav-link" href="#">Logout</a>
         </li>
        <li class="nav-item">
     <a class="nav-link btn btn-outline-success ms-2 px-3 py-1" href="cart">Cart 🛒</a>
@@ -57,7 +74,138 @@
 
 
 <!-- ✅ Content area -->
-{% block main %}{% endblock %}
+
+
+
+
+<div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+
+  <!-- Slides -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/media/images/img4.jpg" class="d-block w-100 img-fluid carousel-img" alt="Slide 1">
+    </div>
+    <div class="carousel-item">
+      <img src="/media/images/img88.jpg" class="d-block w-100 img-fluid carousel-img" alt="Slide 2">
+    </div>
+    <div class="carousel-item">
+      <img src="/media/images/img77.jpg" class="d-block w-100 img-fluid carousel-img" alt="Slide 3">
+    </div>
+    <div class="carousel-item">
+      <img src="/media/images/img66.jpg" class="d-block w-100 img-fluid carousel-img" alt="Slide 4">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% block main %}
+
+
+
+
+
+{% endblock %}
+<!-- Your content blocks above -->
+
+{% block footer %}
+<footer class="bg-dark text-white pt-5 pb-4">
+  <div class="container text-md-start text-center">
+    <div class="row">
+
+      <!-- Brand/About -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase fw-bold mb-3">
+          <i class="fa fa-cart-plus me-2 text-warning"></i>MY Store
+        </h5>
+        <p class="text-muted">
+          MY Store is built by <strong>Dayanand</strong> — Python Full Stack Developer.
+          An end-to-end project built using Django, React, MySQL, Bootstrap and more.
+        </p>
+       <div>
+          <a href="https://github.com/Dayaa401" class="text-white me-3" target="_blank"><i class="fab fa-github fa-lg"></i></a>
+          <a href="https://www.linkedin.com/in/dayanand-allada-872342355/" class="text-white me-3" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
+          <a href="mailto:alladadayanad@gmail.com" class="text-white"><i class="fas fa-envelope fa-lg"></i></a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-2 mb-4">
+        <h6 class="text-uppercase fw-bold mb-3">Explore</h6>
+        <ul class="list-unstyled">
+          <li><a href="/" class="text-reset text-decoration-none">Home</a></li>
+          <li><a href="/" class="text-reset text-decoration-none">Products</a></li>
+          <li><a href="/cart" class="text-reset text-decoration-none">Cart</a></li>
+          <li><a href="/" class="text-reset text-decoration-none">Checkout</a></li>
+        </ul>
+      </div>
+
+      <!-- Developer Info -->
+      <div class="col-md-3 mb-4">
+        <h6 class="text-uppercase fw-bold mb-3">About Developer</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.linkedin.com/in/dayanand-allada-872342355/" class="text-reset text-decoration-none">About Me</a></li>
+          <li><a href="https://github.com/Dayaa401" class="text-reset text-decoration-none">Projects</a></li>
+          <li><a href="#" class="text-reset text-decoration-none">Contact</a></li>
+          <li><a href="#" class="text-reset text-decoration-none">Download Resume</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-md-3 mb-4">
+        <h6 class="text-uppercase fw-bold mb-3">Contact</h6>
+        <p class="mb-2"><i class="fa fa-user me-2 text-warning"></i> Allada Dayanand</p>
+        <p class="mb-2"><i class="fa fa-envelope me-2 text-warning"></i> alladadayanad@gmail.com</p>
+        <p class="mb-2"><i class="fa fa-phone me-2 text-warning"></i> +91 89193 20458</p>
+        <p class="mb-0"><i class="fa fa-map-marker me-2 text-warning"></i> Srikakulam, Andhra Pradesh</p>
+      </div>
+    </div>
+  
+    <hr class="border-light">
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+       
+          <div class="text-center p-4">
+      &copy;  2021 Copyright  <strong>MY Store</strong> | Built with 💙 by Dayanand
+    </div>
+
+        
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}
+
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK" crossorigin="anonymous"></script>

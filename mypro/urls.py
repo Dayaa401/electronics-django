@@ -29,6 +29,7 @@ urlpatterns = [
     path('add-to-cart/', views.add_to_cart),
     path('cart/', views.cart),
     path('checkout/', views.checkout),
+    path('product/<int:pk>/', views.product_detail, name='product_detail'),
 ]
 
 # Serve static and media files

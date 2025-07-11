@@ -24,7 +24,7 @@ STATIC_DIR=os.path.join(BASE_DIR,'media')
 SECRET_KEY = 'django-insecure-h&hbgl0sbr779qd#b^(ddll@%_(9&118-u6!2ofe87%#*8%!m='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
